@@ -45,13 +45,15 @@ class MovieService {
     private fun convertApiResultsToOurMovieDomain(rawResults: SearchResults?): List<Movie> {
         var results = mutableListOf<Movie>()
 
-//        results.add(Movie(14,"Jaws","http://","Great!"))
-//        results.add(Movie(14,"Cow","http://","Great!"))
-//        results.add(Movie(14,"Dog","http://","Great!"))
+
 
         if (rawResults != null){
+            var i = 1
             rawResults.results.forEach {
-                results.add(makeMovieFromSearchResult(it))
+                if ( i < 11) {
+                    results.add(makeMovieFromSearchResult(it))
+                    i++
+                }
             }
         }
 
@@ -64,7 +66,7 @@ class MovieService {
 
     private fun makePosterUrl(posterpath: String?): String {
         return if (posterpath!= null){
-            "dummybasedurl"+ posterpath
+            "https://image.tmdb.org/t/p/w154"+ posterpath
         }
         else {
             ""
@@ -74,31 +76,4 @@ class MovieService {
 }
 
 
-/*
-{
-  "page": 1,
-  "total_results": 41,
-  "total_pages": 3,
-  "results": [
-    {
-      "vote_count": 4445,
-      "id": 578,
-      "video": false,
-      "vote_average": 7.6,
-      "title": "Jaws",
-      "popularity": 22.554,
-      "poster_path": "/l1yltvzILaZcx2jYvc5sEMkM7Eh.jpg",
-      "original_language": "en",
-      "original_title": "Jaws",
-      "genre_ids": [
-        27,
-        53,
-        12
-      ],
-      "backdrop_path": "/uTVuKo6OTGiead1ncsfH2klqYHC.jpg",
-      "adult": false,
-      "overview": "An insatiable great white shark terrorizes the townspeople of Amity Island, The police chief, an oceanographer and a grizzled shark hunter seek to destroy the bloodthirsty beast.",
-      "release_date": "1975-06-18"
-    },
 
- */
